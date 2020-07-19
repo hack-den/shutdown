@@ -4,11 +4,13 @@ import subprocess
 
 p = platform.system()
 
-if p == 'Linux':
-	os.system('systemctl poweroff -i')
+shutdown_dict = {
+	"Linux" : "systemctl poweroff -i",
+	"Windows" : "shutdown /s /t 00",
+}
 
-elif p == 'Windows':
-	os.system('shutdown /s /t 00')
+if p in shutdown_dict.keys() :
+	os.system(shutdown_dict[p])
 
 elif p == 'Darwin':
 	subprocess.call(['osascript', '-e',
